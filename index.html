@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+	<title>Evolution Tower Defense</title>
+	<link rel="icon" href="images/bug/red-1.png">
+	<!--Include style.css file-->
+	<link rel="stylesheet" href="style.css">
+	<!--Include maps.js file-->
+	<script src="maps.js"></script>
+	<!--Include monster.js file-->
+	<script src="monster.js"></script>
+	<!--Include tower.js file-->
+	<script src="tower.js"></script>
+</head>
+<body>
+	<!-- Main menu -->
+	<div id="home">
+		<p class="title">Evolution Tower<br>Defense</p>
+		<button onclick="playButton();">Play The Game</button><br>
+		<button onclick="document.getElementById('instructions').classList.remove('hidden');">Instructions</button><br>
+		<button onclick="showLeaderboard();">Leaderboard</button>
+	</div>
+	<!-- Enter name for highscore page -->
+	<div id="enterName" class="hidden">
+		<p class="title">New Highscore!</p>
+		<input type="text" id="nameInput" placeholder="Enter your name ..."><br>
+		<button id="nameSubmit">Submit</button>
+	</div>
+	<!-- Game over page -->
+	<div id="endGame" class="hidden">
+		<p class="title">Game Over</p>
+		<p class="score">Score: <span id="score-display">1</span></p>
+		<button onclick="location.reload();">Back To Menu</button><br>
+	</div>
+	<!-- Instructions page -->
+	<div id="instructions" class="hidden">
+		<p class="title">Instructions</p>
+		<p>Build towers using your mouse and the menu, by clicking where you want them to go.<br>To cancel building, click when the outline is red.</p><br>
+		<img src="images/upgrade.png" height="64" draggable="false"><br><br>
+		<p>Upgrade towers to increase their damage and speed.<br>To view a tower's sub-menu, click on it.</p><br>
+		<p>The monsters will evolve depending on what you build.<br>There is a small chance of more powerful monsters spawning:</p><br>
+		<img src="images/evolution.png" height="64" draggable="false"><br><br>
+		<p>Red bugs have no special mutations.<br>Yellow lightning bugs have extra speed.<br>Blue fortified bugs have extra health.</p>
+		<button onclick="document.getElementById('instructions').classList.add('hidden');">Back To Menu</button>
+	</div>
+	<!-- Leaderboard page -->
+	<div id="leaderboard" class="hidden">
+		<p class="title">Leaderboard</p>
+		<div id="highscores">
+			<p><span id="hs-name1">-</span> &bull; <span id="hs-score1">-</span> &bull; <span id="hs-coins1">$ -</span></p>
+			<p><span id="hs-name2">-</span> &bull; <span id="hs-score2">-</span> &bull; <span id="hs-coins2">$ -</span></p>
+			<p><span id="hs-name3">-</span> &bull; <span id="hs-score3">-</span> &bull; <span id="hs-coins3">$ -</span></p>
+			<p><span id="hs-name4">-</span> &bull; <span id="hs-score4">-</span> &bull; <span id="hs-coins4">$ -</span></p>
+			<p><span id="hs-name5">-</span> &bull; <span id="hs-score5">-</span> &bull; <span id="hs-coins5">$ -</span></p>
+		</div>
+		<button onclick="document.getElementById('leaderboard').classList.add('hidden');">Back To Menu</button>
+	</div>
+	<img id="tilesheet" src="images/tilesheet.png">
+	<canvas onclick="canvasClick();"></canvas>
+	<div id="selection">
+		<!-- Information about the selected tower -->
+		<div id="tower-info"><span id="tower-type">Rock</span> Tower<br>Level <span id="tower-level">1</span></div>
+		<!-- Buttons to enable the player to upgrade or sell a tower -->
+		<button class="change-tower" id="upgrade-button" onclick="upgradeTower();">
+			<img src="./images/towers/tower-1-2.png" id="upgrade-image" draggable="false"><br>
+			$ <span id="upgrade-cost">1000</span>
+		</button>
+		<button class="change-tower" onclick="sellTower();">
+			<img src="./images/towers/projectile-4-3.png" class="no-margin" draggable="false"><br>
+			Destroy
+		</button>
+		<button class="change-tower" onclick="deselect();">
+			<img src="./images/deselect.png" class="no-margin" draggable="false"><br>
+			De-Select
+		</button>
+	</div>
+	<div id="menu">
+		<button id="next-wave" onclick="nextWave();">Next Wave</button>
+		<!-- Buttons to enable the player to build towers -->
+		<button class="build-tower" id="tower-1" onclick="buildTower(1);">
+			<img src="./images/towers/tower-1-1.png" draggable="false"><br>
+			$ 500
+		</button>
+		<button class="build-tower" id="tower-2" onclick="buildTower(2);">
+			<img src="./images/towers/tower-2-1.png" draggable="false"><br>
+			$ 1000
+		</button>
+		<button class="build-tower" id="tower-5" onclick="buildTower(5);" disabled="disabled">
+			<img src="./images/towers/tower-5-1.png" draggable="false"><br>
+			$ 1500
+		</button>
+		<button class="build-tower" id="tower-3" onclick="buildTower(3);" disabled="disabled">
+			<img src="./images/towers/tower-3-1.png" draggable="false"><br>
+			$ 2000
+		</button>
+		<button class="build-tower" id="tower-4" onclick="buildTower(4);" disabled="disabled">
+			<img src="./images/towers/tower-4-1.png" draggable="false"><br>
+			$ 4000
+		</button>
+		<div id="info-display">
+			<span class="gold-text">$ <span id="coins-display">1000</span></span> <span class="black-text">&#124;</span> Wave <span id="wave-display">1</span>
+			<br>
+			<img id="health-display" src="./images/health/10.png" draggable="false">
+		</div>
+	</div>
+	<!--Inlucde main.js file-->
+	<script src="main.js"></script>
+</body>
+</html>
