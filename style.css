@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css?family=Coustard&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	user-select: none;
+	-moz-user-select: none;
+}
+*, *:hover, *:focus {
+	outline: none;
+}
+html, body {
+	background: url(images/forest.png);
+	background-size: 5% 5%;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+canvas {
+	background: #83D135;
+	margin: 0;
+	box-shadow: 0px 0px 50px 25px rgba(0,0,0,0.8);
+}
+#menu {
+	background: url(images/wood.jpg);
+	border-top: 2px solid #000000;
+	background-size: 128px 128px;
+	box-shadow: inset 0px 0px 5px 3px #000000;
+	padding: 15px;
+	height: 85px;
+	width: calc(100% - 30px);
+	text-align: left;
+	position: absolute;
+	z-index: 100;
+	bottom: 0;
+}
+#selection {
+	position: fixed;
+	padding: 15px;
+	height: 85px;
+	width: calc(100% - 30px);
+	text-align: left;
+	z-index: 102;
+	bottom: 0;
+	left: 0;
+	display: none;
+}
+#tower-info {
+	color: #FFFFFF; /* Set text colour to white */
+	font-size: 24px; /* Set font size to 24 pixels */
+	text-align: left; /* Align text to the left */
+	font-weight: normal;
+	display: inline-block;
+	height: 85px;
+	width: 195px;
+	text-shadow: 2px 2px #000000;
+	font-family: 'Coustard', sans-serif; /* Use the font Coustard, and sans-serif if it isn't available */
+}
+#info-display {
+	float: right; /* Position information to the right of the menu bar */
+	color: #FFFFFF; /* Set text colour to white */
+	font-size: 24px; /* Set font size to 24 pixels */
+	text-shadow: 2px 2px #000000;
+	text-align: right; /* Align text to the right */
+	font-family: 'Coustard', sans-serif; /* Use the font Coustard, and sans-serif if it isn't available */
+}
+.black-text {
+	color: #000000; /* Set text colour to black */
+}
+.gold-text {
+	color: #D4AF37; /* Set text colour to gold */
+}
+#health-display {
+	height: 50px;
+}
+#menu button, #selection button {
+	padding: 10px;
+	height: 100%;
+}
+#tilesheet {
+	display: none;
+}
+/* Build tower buttons styling (enabled) */
+.build-tower, .change-tower {
+	border: 2px solid #000000; /* Change border to 2 pixels wide and black */
+	height: 85px; /* Set height to appropriate size */
+	width: 85px; /* Set width to appropriate size */
+	overflow: hidden; /* Hide any content that overflows the size of the button */
+	margin-left: 10px; /* Add a margin to the left of each button to space them out */
+	background: #333333; /* Set background to light black */
+	box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0), inset 0px 0px 15px 3px #000000; /* Apply a box shadow effect */
+	opacity: 1; /* Set opacity to full (it is measured on a scale of 0 to 1 */
+	cursor: pointer; /* Set the cursor style to pointer */
+	transition: all 0.5s; /* Adds a 500 millisecond transition to all changes of attributes */
+	text-align: center; /* Align text in center */
+	color: #D4AF37; /* Set text colour to gold */
+}
+/* Build tower buttons styling on user hover */
+.build-tower:hover, .change-tower:hover {
+	transition: box-shadow 0.5s; /* Adds a 500 millisecond transition to changes of box-shadow */
+	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5), inset 0px 0px 15px 3px #000000;
+}
+/* Build tower buttons styling (disabled) */
+.build-tower:disabled, .change-tower:disabled {
+	transition: all 0.5s; /* Adds a 500 millisecond transition to all changes of attributes */
+	box-shadow: inset 0px 0px 50px 15px #000000; /* Apply an inside box shadow effect */
+	cursor: default; /* Set the cursor style to default */
+	color: #333333; /* Set text colour to gold */
+}
+.build-tower:disabled img, .change-tower:disabled img {
+	transition: opacity 0.5s; /* Adds a 500 millisecond transition to changes of opacity */
+	opacity: 0.2; /* Set opacity to half */
+}
+/* Re-size images on the build tower buttons */
+.build-tower img, .change-tower img {
+	display: inline-block;
+	margin-left: 8px; /* Position in center of button */
+	width: 50px; /* Height of image in pixels */
+	height: 50px; /* Width of image in pixels */
+}
+.no-margin {
+	margin-left: 0px !important; /* Remove margin to the left of each button */
+}
+/* Next wave button */
+#next-wave {
+	position: relative; /* Fix positioning of the button */
+	bottom: 24px; /* ^^ */
+	cursor: pointer; /* Set the cursor style to pointer */
+	border: 2px solid #000000; /* Change border to 2 pixels wide and black */
+	border-radius: 15px; /* Add curved corners */
+	height: 85px; /* Set height to appropriate size */
+	width: 85px; /* Set width to appropriate size */
+	transition: all 0.5s; /* Adds a 500 millisecond transition to all changes of attributes */
+	overflow: hidden; /* Hide any content that overflows the size of the button */
+	margin-left: 10px; /* Add a margin to the left of each button to space them out */
+	background: #333333; /* Set background to light black */
+	color: #FFFFFF; /* Change text colour to white */
+	box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0), inset 0px 0px 15px 3px #000000; /* Apply a box shadow effect */
+	font-family: 'Coustard', sans-serif; /* Use the font Coustard, and sans-serif if it isn't available */
+	font-size: 16px;
+}
+/* Next wave button (hover) */
+#next-wave:hover {
+	transition: box-shadow 0.5s; /* Adds a 500 millisecond transition to changes of box-shadow */
+	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5), inset 0px 0px 15px 3px #000000;
+}
+/* Next wave button (disabled) */
+#next-wave:disabled {
+	color: rgba(255, 255, 255, 0.5); /* Make the text 50% transparent */
+	cursor: default; /* Change the cursor back to default */
+	box-shadow: inset 0px 0px 50px 15px #000000; /* Apply an inside box shadow effect */
+}
+/* Home menu screen */
+#home, #endGame, #instructions, #leaderboard, #enterName {
+	position: fixed; /* Fix position on the page */
+	background: url(images/dark-wood.jpg); /* Dark wood image background */
+	color: #FFFFFF; /* White text */
+	top: 0; /* Position at the top of the screen */
+	left: 0; /* Position at the far left of the screen */
+	width: calc(100% - 100px); /* Cover the whole width (excluding padding) */
+	height: calc(100% - 100px); /* Cover the whole height (excluding padding) */
+	overflow: hidden;
+	padding: 50px; /* 25 pixels of padding */
+	margin: 0; /* No margin */
+	z-index: 120; /* Position above everything else */
+	font-family: 'Coustard', sans-serif; /* Use the font Coustard, and sans-serif if it isn't available */
+	transition: all 0.8s; /* Adds a 800 millisecond transition to all changes of attributes */
+}
+#instructions, #leaderboard {
+	z-index: 125; /* Position above the home menu */
+}
+/* Home screen hidden */
+#home.hidden {
+	top: 100%; /* Move home menu off the screen */
+}
+#endGame.hidden, #instructions.hidden, #leaderboard.hidden, #enterName.hidden {
+	top: -100%; /* Move game over page off the screen */
+}
+/* Title text */
+.title {
+	font-size: 48px; /* Set font size to 48 pixels */
+	margin-bottom: 25px; /* 50 pixels of margin at the bottom of the text */
+}
+#endGame .score {
+	font-size: 42px; /* Set font size to 42 pixels */
+}
+/* Home menu buttons */
+#home button, #endGame button, #instructions button, #leaderboard button, #enterName button {
+	padding: 25px; /* 25 pixels of padding */
+	cursor: pointer; /* Change mouse cursor to pointer */
+	margin-top: 25px; /* 50 pixels of margin at the top of the button */
+	font-size: 32px; /* Set font size to 32 pixels */
+	background: #111111; /* Set background to light black */
+	color: #FFFFFF; /* Change text colour to white */
+	box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0), inset 0px 0px 15px 3px #000000; /* Apply a box shadow effect */
+	font-family: 'Coustard', sans-serif; /* Use the font Coustard, and sans-serif if it isn't available */
+	border: 2px solid #000000; /* Change border to 2 pixels wide and black */
+	border-radius: 15px; /* Add curved corners */
+	transition: all 0.2s; /* Adds a 200 millisecond transition to all changes of attributes */
+}
+#home button:hover, #endGame button:hover, #instructions button:hover, #leaderboard button:hover, #enterName button:hover {
+	background: #FFFFFF; /* Set background to white */
+	color: #111111; /* Change text colour to light black */
+}
+#highscores p {
+	font-size: 36px;
+	color: #D4AF37; /* Gold text */
+}
+#instructions p:not(.title) {
+	font-size: 18px;
+}
+#highscores p span {
+	color: #FFFFFF; /* White text */
+}
+#nameInput {
+	width: 400px; /* Set width to 400 pixels */
+	border: 2px solid; /* 2px wide border */
+	border-color: white; /* White border colour */
+	box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0), inset 0px 0px 15px 3px #000000; /* Box shadow effect */
+	background: rgba(0, 0, 0, 0.25); /* Transparent black background (25% opacity) */
+	font-size: 32px; /* Set font size to 32 pixels */
+	color: #FFFFFF; /* Set text colour to white */
+	padding: 25px; /* 25 pixels of padding */
+}
